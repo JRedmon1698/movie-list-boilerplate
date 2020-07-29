@@ -1,13 +1,14 @@
 import React from 'react';
+import MovieListEntry from './MovieListEntry.jsx';
 
-const MovieListEntry = (props) => (
-    <div> {console.log('props: ', props.movies)}
+const MovieList = ({ movies }) => (
+    <div> 
         <ul>
-            {movies.map((movie) => (
-            <MovieListEntry movie={movie} key={movie.title} />
-        ))}
+            {movies.map((movie, index) => (
+                <MovieListEntry movie={movie} key={movie.title + index} />
+            ))}
         </ul>
     </div>
 )
 
-export default MovieListEntry;
+export default MovieList;
