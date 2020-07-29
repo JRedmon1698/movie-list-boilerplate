@@ -1,8 +1,9 @@
 import React from 'react';
 
 const MovieListEntry = (props) => (
-    <div>
-        <ul>{props.movies.map((movie) => (
+    <div> {console.log('props: ', props.movies)}
+        <ul>
+            {movies.map((movie) => (
             <MovieListEntry movie={movie} key={movie.title} />
         ))}
         </ul>
