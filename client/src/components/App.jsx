@@ -16,11 +16,27 @@ class App extends React.Component {
     this.state = {
       movies: movies
     }
+    this.handleChange = this.handleChange.bind(this);
   }
+
+handleChange(e) {
+  for (let i = 0; i < this.props.movies.length; i++) {
+    if (e.target.value === this.props.movies[i].title) {
+      return (this.props.movies[i].title);
+    }
+  }
+}
+
+
   render() {
     return (
     <div>
-      <div>movies!</div>
+      <div>Welcome to Movie List!</div>
+      <div>
+        <form>
+        <input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />
+        </form>
+      </div>
       <div><MovieList movies={this.state.movies}/></div>
     </div>
     )
