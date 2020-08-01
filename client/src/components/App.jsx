@@ -14,32 +14,50 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: movies
+      movies: movies,
+      filteredMovies: []
     }
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-handleChange(e) {
-  for (let i = 0; i < this.props.movies.length; i++) {
-    if (e.target.value === this.props.movies[i].title) {
-      return (this.props.movies[i].title);
+handleSubmit(e) {
+
+  for (let i = 0; i < this.state.movies.length; i++) {
+    if (e.target.value === this.state.movies[i].title) {
+      this.setState({filteredMovies: e.target.value});
     }
   }
+  e.preventDefault();
 }
 
 
+
   render() {
-    return (
-    <div>
-      <div>Welcome to Movie List!</div>
+    if (this.state.filteredMovies.length === 0) {
+      return (
       <div>
-        <form>
-        <input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />
+        <div>
+          <h2>Welcome to Movie List!</h2>
+        </div>
+        <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Search Movies:
+            <input type="text" value={this.state.value} />
+          </label>
+          <input type="submit" value="Submit" />
         </form>
+        </div>
+        <div><MovieList movies={this.state.movies}/></div>
       </div>
-      <div><MovieList movies={this.state.movies}/></div>
-    </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+          <div><MovieList filteredMovies={this.state.filteredMovies}/></div>
+        </div>
+      )
+    }
   }
 }
 
