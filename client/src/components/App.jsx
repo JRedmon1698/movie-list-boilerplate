@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from './MovieList.jsx';
 import MovieListEntry from './MovieListEntry.jsx';
+import FilteredMovieList from './FilteredMovieList.jsx';
 
 var movies = [
   {title: 'Mean Girls'},
@@ -15,21 +16,28 @@ class App extends React.Component {
     super(props);
     this.state = {
       movies: movies,
-      filteredMovies: []
+      filteredMovies: [],
+      value: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
 handleSubmit(e) {
 
+  console.log(this.state.filteredMovies);
+  e.preventDefault();
   for (let i = 0; i < this.state.movies.length; i++) {
-    if (e.target.value === this.state.movies[i].title) {
-      this.setState({filteredMovies: e.target.value});
+    if (this.state.value === this.state.movies[i].title) {
+      this.state.filteredMovies.push(this.state.movies[i]);
+      this.setState({value: ''});
     }
   }
-  e.preventDefault();
 }
 
+handleChange(e) {
+  this.setState({value: e.target.value});
+}
 
 
   render() {
@@ -43,7 +51,7 @@ handleSubmit(e) {
         <form onSubmit={this.handleSubmit}>
           <label>
             Search Movies:
-            <input type="text" value={this.state.value} />
+            <input type="text" value={this.state.value} onChange={this.handleChange}/>
           </label>
           <input type="submit" value="Submit" />
         </form>
@@ -54,7 +62,8 @@ handleSubmit(e) {
     } else {
       return (
         <div>
-          <div><MovieList filteredMovies={this.state.filteredMovies}/></div>
+          <div>We found your movie!</div>
+          <div><FilteredMovieList filteredMovies={this.state.filteredMovies}/></div>
         </div>
       )
     }
