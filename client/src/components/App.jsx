@@ -24,13 +24,13 @@ class App extends React.Component {
   }
 
 handleSubmit(e) {
-
-  console.log(this.state.filteredMovies);
   e.preventDefault();
   for (let i = 0; i < this.state.movies.length; i++) {
     if (this.state.value === this.state.movies[i].title) {
       this.state.filteredMovies.push(this.state.movies[i]);
       this.setState({value: ''});
+    } else {
+      
     }
   }
 }
