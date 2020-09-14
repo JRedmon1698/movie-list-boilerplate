@@ -49,7 +49,8 @@ handleChange(e) {
         </div>
         <div className ='search-bar'>
           <input type="text" value={this.state.value} onChange={this.handleChange}/> 
-          <button type="submit" value="submit" >
+          <button type="submit" value="submit" onClick={this.handleSubmit}>{console.log(this.state.value, this.state.filteredMovies)}
+            Search
             </button>
         </div>
         <div><MovieList movies={this.state.movies}/></div>
