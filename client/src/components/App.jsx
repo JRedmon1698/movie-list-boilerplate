@@ -26,7 +26,7 @@ class App extends React.Component {
 handleSubmit(e) {
   e.preventDefault();
   for (let i = 0; i < this.state.movies.length; i++) {
-    if (this.state.value === this.state.movies[i].title) {
+    if ((this.state.value).toLowerCase() === (this.state.movies[i].title).toLowerCase()) {
       this.state.filteredMovies.push(this.state.movies[i]);
       this.setState({value: ''});
     } else {
@@ -49,7 +49,7 @@ handleChange(e) {
         </div>
         <div className ='search-bar'>
           <input type="text" value={this.state.value} onChange={this.handleChange}/> 
-          <button type="submit" value="submit" onClick={this.handleSubmit}>{console.log(this.state.value, this.state.filteredMovies)}
+          <button type="submit" value="submit" onClick={this.handleSubmit}>
             Search
             </button>
         </div>
