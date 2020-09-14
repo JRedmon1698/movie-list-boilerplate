@@ -1,4 +1,5 @@
-CREATE DATABASE movies;
+DROP DATABASE movie_list;
+CREATE DATABASE movie_list;
 
 USE movie_list;
 
