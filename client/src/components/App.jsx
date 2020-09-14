@@ -47,14 +47,10 @@ handleChange(e) {
         <div>
           <h2>Welcome to Movie List!</h2>
         </div>
-        <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Search Movies:
-            <input type="text" value={this.state.value} onChange={this.handleChange}/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <div className ='search-bar'>
+          <input type="text" value={this.state.value} onChange={this.handleChange}/> 
+          <button type="submit" value="submit" >
+            </button>
         </div>
         <div><MovieList movies={this.state.movies}/></div>
       </div>
