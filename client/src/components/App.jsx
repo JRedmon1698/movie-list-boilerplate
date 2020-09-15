@@ -1,28 +1,42 @@
 import React from 'react';
 import MovieList from './MovieList.jsx';
-import MovieListEntry from './MovieListEntry.jsx';
 import FilteredMovieList from './FilteredMovieList.jsx';
 import AddMovieBar from './AddMovieBar.jsx';
+import axios from 'axios';
 
-var movies = [
-  { title: 'Mean Girls' },
-  { title: 'Hackers' },
-  { title: 'The Grey' },
-  { title: 'Sunshine' },
-  { title: 'Ex Machina' },
-];
+
+// var movies = [
+//   {
+//     title: 'Mean Girls',
+//     director: 'Someone',
+//     release_date: '2000'
+//   },
+
+// ];
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      movies: movies,
+      movies: [],
       filteredMovies: [],
       searchValue: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addMovie = this.addMovie.bind(this);
+    this.getMovies = this.getMovies.bind(this);
+  }
+
+  componentDidMount() {
+    this.getMovies();
+  }
+
+  getMovies() {
+    axios.get('/api/movies')
+      .then(({ data }) => this.setState({ movies: data }))
+      .catch((err) => console.log(err));
   }
 
   handleSubmit(e) {
@@ -38,29 +52,15 @@ class App extends React.Component {
     }
   }
 
-
   handleChange(e) {
     this.setState({ searchValue: e.target.value });
   }
 
   addMovie(movie) {
-    for (let i = 0; i < this.state.movies.length; i++) {
-      if (this.state.movies.indexOf(movie) !== -1) {
-        // alert('Movie is already in list!');
-        console.log('in first if block');
-        return;
-      } else {
-        console.log(movie);
-        this.setState(state => {
-          const movies = this.state.movies.concat(movie);
-          return {
-            movies,
-            filteredMovies: [],
-            searchValue: ''
-          }
-        })
-      }
-    }
+        axios.post('/api/movies', movie)
+          .then(this.getMovies)
+          .catch((err) => console.log(err));
+          console.log(`movie: ${movie}`);
   }
 
   render() {
@@ -77,7 +77,7 @@ class App extends React.Component {
             </button>
           </div>
           <div><MovieList movies={this.state.movies} /></div>
-          <div><AddMovieBar addMovie={this.addMovie} movies={this.state.movies}/></div>
+          <div><AddMovieBar addMovie={this.addMovie} movies={this.state.movies} /></div>
         </div>
       )
     } else {

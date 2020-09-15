@@ -5,15 +5,17 @@ class AddMovieBar extends Component {
         super(props);
 
         this.state = {
-            title: ''
+            title: '',
+            director: '',
+            release_date: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
-        this.setState ({
-            title: e.target.value
+        this.setState({
+            [event.target.name]: event.target.value
         });
     }
 
@@ -21,25 +23,40 @@ class AddMovieBar extends Component {
         e.preventDefault();
         this.props.addMovie(this.state);
         this.setState({
-            title: ''
+            movieObj: ''
         });
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>{console.log(this.state, this.props)}
-                    <input
+                <label>Title</label>
+                <input
                     type='text'
-                    name='movieTitle'
+                    name='title'
                     value={this.state.title}
                     onChange={this.handleChange}
-                    />
-                <button>Add Movie</button>
+                />
+                <label>Director</label>
+                <input
+                    type='text'
+                    name='director'
+                    value={this.state.director}
+                    onChange={this.handleChange}
+                />
+                <label>Release Year</label>
+                <input
+                    type='text'
+                    name='release_date'
+                    value={this.state.release_date}
+                    onChange={this.handleChange}
+                />
+                <button>Add Movie{console.log(event)}</button>
             </form>
         )
     }
 
-    
+
 }
 
 export default AddMovieBar;
