@@ -5,7 +5,7 @@ const MovieList = (props) => (
     <div> 
         <ul>
             {props.movies.map((movie, index) => (
-                <MovieListEntry movie={movie} key={movie.title + index} />
+                <MovieListEntry movie={movie} key={movie.title + index} deleteMovie={props.deleteMovie}/>
             ))}
         </ul>
     </div>

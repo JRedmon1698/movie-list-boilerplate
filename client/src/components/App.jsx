@@ -27,6 +27,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.addMovie = this.addMovie.bind(this);
     this.getMovies = this.getMovies.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
   }
 
   componentDidMount() {
@@ -60,7 +61,11 @@ class App extends React.Component {
         axios.post('/api/movies', movie)
           .then(this.getMovies)
           .catch((err) => console.log(err));
-          console.log(`movie: ${movie}`);
+  }
+
+  deleteMovie(movie) {
+    axios.delete('/api/movies', {params: {title: movie}})
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -68,7 +73,7 @@ class App extends React.Component {
       return (
         <div>
           <div>
-            <h2>Welcome to Movie List!</h2>
+            <h2>Welcome to Your Movie List!</h2>
           </div>
           <div className='search-bar'>
             <input type="text" value={this.state.searchValue} onChange={this.handleChange} />
@@ -76,7 +81,7 @@ class App extends React.Component {
               Search
             </button>
           </div>
-          <div><MovieList movies={this.state.movies} /></div>
+          <div><MovieList movies={this.state.movies} deleteMovie={this.deleteMovie}/></div>
           <div><AddMovieBar addMovie={this.addMovie} movies={this.state.movies} /></div>
         </div>
       )

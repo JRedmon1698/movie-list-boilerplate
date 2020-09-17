@@ -22,19 +22,24 @@ app.get('/api/movies', (req, res) => {
 
 app.post('/api/movies', (req, res) => {
   let sql = 'INSERT INTO movies (title, director, release_date) VALUES (?, ?, ?)';
-  console.log(`req: ${req}`);
   db.query(sql, [req.body.title, req.body.director, req.body.release_date], (err) => {
     if (err) {
       console.log(err);
     } else {
-      res.status(201);
-      console.log('Movie added!');
+      res.status(201).send('Movie added!');
     }
   });
 });
 
 app.delete('/api/movies', (req, res) => {
-  
+  let sql = 'DELETE FROM movies WHERE title = ?';
+  db.query(sql, [req.query.title], (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).send('Movie deleted.');
+    }
+  });
 });
 
 app.listen(PORT, () => {

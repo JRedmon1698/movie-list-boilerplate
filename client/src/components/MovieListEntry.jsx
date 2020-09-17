@@ -1,7 +1,10 @@
 import React from 'react';
 
-const MovieListEntry = ({ movie }) => (
-    <li>{movie.title}, {movie.director}, {movie.release_date}</li> 
+const MovieListEntry = (props) => (
+    <div>
+        <li>{props.movie.title}, {props.movie.director}, {props.movie.release_date}</li>
+        <button onClick={() => {props.deleteMovie(props.movie.title)}}>Delete</button>{console.log(props)}
+    </div>
 );
 
 export default MovieListEntry;

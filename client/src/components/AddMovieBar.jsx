@@ -29,7 +29,7 @@ class AddMovieBar extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>{console.log(this.state, this.props)}
+            <form onSubmit={this.handleSubmit}>
                 <label>Title</label>
                 <input
                     type='text'
@@ -51,7 +51,7 @@ class AddMovieBar extends Component {
                     value={this.state.release_date}
                     onChange={this.handleChange}
                 />
-                <button>Add Movie{console.log(event)}</button>
+                <button>Add Movie</button>
             </form>
         )
     }
