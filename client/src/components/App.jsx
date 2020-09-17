@@ -5,15 +5,6 @@ import AddMovieBar from './AddMovieBar.jsx';
 import axios from 'axios';
 
 
-// var movies = [
-//   {
-//     title: 'Mean Girls',
-//     director: 'Someone',
-//     release_date: '2000'
-//   },
-
-// ];
-
 class App extends React.Component {
   constructor(props) {
     super(props);
